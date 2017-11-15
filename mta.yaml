@@ -1,3 +1,27 @@
 ID: techEd_
 _schema-version: '2.0'
 version: 0.0.1
+modules:
+  - name: tddb
+    type: hdb
+    path: tddb
+    requires:
+      - name: hdi-container
+  - name: js
+    type: nodejs
+    path: js
+    provides:
+      - name: js_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: hdi-container
+      - name: tddb
+resources:
+  - name: hdi-container
+    parameters:
+      config:
+        schema: DB
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
